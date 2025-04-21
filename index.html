@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400..700&family=Baloo+2:wght@400..800&family=Onest:wght@100..900&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            font-family: "AR One Sans", sans-serif;
+            text-align: center;
+            /* padding: 20px; */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calculator {
+            width: 420px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .display {
+            /* width: 100%; */
+            height: 60px;
+            font-size: 2em;
+            text-align: right;
+            margin-bottom: 15px;
+            padding: 4px;
+            border: none;
+            border-radius: 3px;
+            /* background: #f4f4f4; */
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 10px;
+            font-size: 1.4em;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+            background: #e0e0e0;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background: #d1d1d1;
+        }
+
+        .btn.operator {
+            background-color: #ff9800;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn.equal {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn.clear {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button class="btn clear">C</button>
+            <button class="btn">7</button>
+            <button class="btn">8</button>
+            <button class="btn">9</button>
+            <button class="btn operator">/</button>
+            <button class="btn">4</button>
+            <button class="btn">5</button>
+            <button class="btn">6</button>
+            <button class="btn operator">*</button>
+            <button class="btn">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+            <button class="btn operator">-</button>
+            <button class="btn">0</button>
+            <button class="btn">.</button>
+            <button class="btn equal">=</button>
+            <button class="btn operator">+</button>
+        </div>
+    </div>
+    <script>
+        //         const arr = Array.from({ length: 5 }, (_, i) => i + 1);
+        // console.log(arr); // [1, 2, 3, 4, 5]
+
+        let arrBtns = Array.from(document.querySelectorAll(".btn"));
+        let display = document.getElementById("display"); // Get input field, not its value
+
+        let finalResult = "";
+
+        arrBtns.forEach((item) => {
+            item.addEventListener("click", () => {
+                let text = item.innerText;
+                console.log(text);
+
+                if (text === "C") {
+                    // Clear display on 'C' press
+                    display.value = "";
+                } else if (text === "=") {
+                    // Evaluate the expression
+                    try {
+                        finalResult = eval(display.value);
+                        display.value = finalResult;
+                    } catch (error) {
+                        display.value = "Error";
+                    }
+                } else {
+                    // Append numbers/operators to display
+                    display.value += text;
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
